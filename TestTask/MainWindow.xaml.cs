@@ -17,13 +17,14 @@ using CompanyLib;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json;
 using System.IO;
+using MahApps.Metro.Controls;
 
 namespace TestTask
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         public Company Company { get; set; }
         public static Random rnd = new Random((int)DateTime.Now.Ticks & 0x0000FFFF);
@@ -178,7 +179,5 @@ namespace TestTask
         }
 
         #endregion logic
-
-
     }
 }

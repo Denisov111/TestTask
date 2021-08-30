@@ -46,7 +46,6 @@ namespace CompanyLib
         private CallResult CheckName(string name)
         {
             CallResult cr = new CallResult();
-
             bool isOk = Regex.IsMatch(name, Config.RegexNamePattern);
             if (!isOk) cr.Error = new Error("enter correct name");
             return cr;
@@ -107,7 +106,7 @@ namespace CompanyLib
         {
             var subWorkers = TreeWalker.Walk<Worker>(workerWithoutBoss, w => w.GetSubordinateWorkers()).Where(w => w != workerWithoutBoss);
             if (subWorkers.Contains(boss))
-                return new CallResult() { Error=new Error("can not set boss, the boss is a subordinate") };
+                return new CallResult() { Error = new Error("can not set boss, the boss is a subordinate") };
             boss.GetSubordinateWorkers().Add(workerWithoutBoss);
             workerWithoutBoss.Boss = boss;
             return new CallResult();
@@ -123,15 +122,13 @@ namespace CompanyLib
         {
             bool isCorrectBeginDates = CheckCorrectBeginDates(dt);
             if (!isCorrectBeginDates)
-            {
                 return new CallResult<decimal>() { Error = new Error("some of the employees have a work start date later than the payroll date, the tree structure is not correct for this date") };
-            }
             BaseRate = baseRate;
             var bosses = Workers.Where(w => w.Boss == null);
             foreach (Worker worker in bosses)
                 worker.CalculateSalaryForWorker(dt);
-            decimal summ = Workers.Sum(w=>w.Salary);
-            return new CallResult<decimal>() { Data=summ};
+            decimal summ = Workers.Sum(w => w.Salary);
+            return new CallResult<decimal>() { Data = summ };
         }
 
         /// <summary>
