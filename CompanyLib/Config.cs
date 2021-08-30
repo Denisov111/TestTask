@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestTask
+namespace CompanyLib
 {
-    class Company
+    class Config
     {
-        static public decimal BaseRate { get; set; }
+        public static DateTime MinDate = new DateTime(1900, 1, 1);
+        public static string RegexNamePattern = "^[a-zA-Z ']{2,128}$";
 
         static public decimal EmployeeBonus = 3;
         static public decimal MaxEmployeeBonus = 30;
@@ -20,8 +21,5 @@ namespace TestTask
         static public decimal SalesBonus = 1;
         static public decimal MaxSalesBonus = 35;
         static public decimal SalesSubordinateBonus = .3m;
-
-        public List<Worker> Workers { get; set; } = new List<Worker>();
-        
     }
 }
