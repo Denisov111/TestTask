@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CompanyLib
 {
-    class Config
+    public class Config
     {
         public static DateTime MinDate = new DateTime(1900, 1, 1);
         public static string RegexNamePattern = "^[a-zA-Z ']{2,128}$";
