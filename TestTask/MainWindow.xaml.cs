@@ -157,6 +157,28 @@ namespace TestTask
             CreateWorkersTree();
         }
 
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            int id = Int32.Parse(workerIdTextBox.Text.Replace(" ", ""));
+            var worker = Company.GetWorkers().Where(w => w.Id == id).FirstOrDefault();
+            if(worker==null)
+            {
+                MessageBox.Show("unknow worker");
+                return;
+            }
+            DateTime? dt = salaryDateDatePicker.SelectedDate;
+            if (dt == null)
+            {
+                MessageBox.Show("select salary date");
+                return;
+            }
+            Company.BaseRate= Int32.Parse(baseRateTextBox.Text.Replace(" ", ""));
+            worker.CalculateSalaryForWorker((DateTime)dt);
+            MessageBox.Show(worker.Salary.ToString());
+        }
+
         #endregion logic
+
+
     }
 }

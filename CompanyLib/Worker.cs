@@ -47,7 +47,7 @@ namespace CompanyLib
             return str;
         }
 
-        internal decimal CalculateSalaryForWorker(DateTime dt)
+        public decimal CalculateSalaryForWorker(DateTime dt)
         {
             if (dt < BeginDate) return 0;
             //first we set the salary on this worker, then we return
@@ -68,7 +68,7 @@ namespace CompanyLib
         /// </summary>
         /// <param name="dt"></param>
         /// <returns></returns>
-        private decimal GetSalary(DateTime dt)
+        public decimal GetSalary(DateTime dt)
         {
             switch (WorkerType)
             {
