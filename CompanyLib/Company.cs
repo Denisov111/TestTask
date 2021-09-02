@@ -77,7 +77,17 @@ namespace CompanyLib
         {
             int? maxId = Workers.Max(w => (int?)w.Id);
             int id = maxId == null ? 1 : (int)++maxId;
-            return new Worker(id, name, beginDate, workerType, this);
+            switch(workerType)
+            {
+                case WorkerType.Employee:
+                    return new Employee(id, name, beginDate, this);
+                case WorkerType.Manager:
+                    return new Manager(id, name, beginDate, this);
+                case WorkerType.Sales:
+                    return new Sales(id, name, beginDate, this);
+                default:
+                    throw new Exception();
+            }
         }
 
         /// <summary>

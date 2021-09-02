@@ -108,7 +108,7 @@ namespace TestTask
                 var res = Company.GetWorkers().Where(w => w.Boss == null);
                 if (res.Count() < 2) break;
                 Worker workerWithoutBoss = res.ToList()[rnd.Next(0, res.Count())];
-                var potentialBosses = Company.GetWorkers().Where(w => w.WorkerType != WorkerType.Employee && w != workerWithoutBoss).ToList();
+                var potentialBosses = Company.GetWorkers().Where(w => w.GetType().Name != typeof(Employee).Name && w != workerWithoutBoss).ToList();
                 var boss = potentialBosses[rnd.Next(0, potentialBosses.Count)];
                 var subWorkers = TreeWalker.Walk<Worker>(workerWithoutBoss, w => w.GetSubordinateWorkers()).Where(w => w != workerWithoutBoss);
                 if (!subWorkers.Contains(boss))
