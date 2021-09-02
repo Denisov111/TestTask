@@ -94,18 +94,14 @@ namespace CompanyLib
         /// Get list of workers
         /// </summary>
         /// <returns></returns>
-        public List<Worker> GetWorkers()
-        {
-            return Workers;
-        }
+        public List<Worker> GetWorkers() => Workers;
+        
 
         /// <summary>
         /// Clear list of workers
         /// </summary>
-        public void ClearWorkers()
-        {
-            Workers.Clear();
-        }
+        public void ClearWorkers() => Workers.Clear();
+        
 
         /// <summary>
         /// Establishing relationships between employees

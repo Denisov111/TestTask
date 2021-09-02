@@ -33,35 +33,28 @@ namespace CompanyLib
             Company = company;
         }
 
-        public List<Worker> GetSubordinateWorkers()
-        {
-            return SubordinateWorkers;
-        }
+        public List<Worker> GetSubordinateWorkers() => SubordinateWorkers;
 
         public override string ToString()
         {
             string str = "Id: " + Id + " " + Name + ": " + this.GetType().Name;
-            if (Salary > 0)
-                return str + " $" + Salary.ToString();
+            if (Salary > 0) str += " $" + Salary.ToString();
             return str;
         }
 
         public decimal CalculateSalaryForWorker(DateTime dt)
         {
-            if (dt < BeginDate) return 0;
-            //first we set the salary on this worker, then we return
-            Salary = GetSalary(dt) + GetBonuseForSubordinate(dt);
-            return Salary;
+            if (dt < BeginDate) throw new Exception("the worker's start date of work is later than the payroll date");
+            return Salary = GetSalary(dt) + GetBonuseForSubordinate(dt);
         }
-          
+
         public decimal GetSalary(DateTime dt)
         {
             DateTime zeroTime = new DateTime(1, 1, 1);
             TimeSpan span = dt - BeginDate;
             int years = (zeroTime + span).Year - 1;
             decimal yearsBonus = years * Bonus > MaxBonus ? MaxBonus : years * Bonus;
-            decimal salary = Company.BaseRate + Company.BaseRate * (yearsBonus / 100);
-            return salary;
+            return Company.BaseRate + Company.BaseRate * (yearsBonus / 100); ;
         }
 
         abstract public decimal GetBonuseForSubordinate(DateTime dt);

@@ -44,20 +44,13 @@ namespace TestTask
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            AddWorker();
-        }
+        private void Button_Click(object sender, RoutedEventArgs e) => AddWorker();
+        
+        private void Button_Click_1(object sender, RoutedEventArgs e) => CreateTestData();
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            CreateTestData();
-        }
+        private void Button_Click_2(object sender, RoutedEventArgs e) => CalculateSalary();
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            CalculateSalary();
-        }
+        private void Button_Click_3(object sender, RoutedEventArgs e) => CalcOneWorker();
 
         private void CreateWorkersTree()
         {
@@ -97,8 +90,7 @@ namespace TestTask
             {
                 string name = names[rnd.Next(0, names.Count - 1)];
                 DateTime dt = new DateTime(rnd.Next(1980, 2015), rnd.Next(1, 13), rnd.Next(1, 29));
-                int tt = rnd.Next(0, 3);
-                WorkerType wt = (WorkerType)tt;
+                WorkerType wt = (WorkerType)rnd.Next(0, 3);
                 CallResult cr = Company.AddWorker(name, dt, wt);
                 if (!cr.Success) MessageBox.Show(cr.Error.Message);
             }
@@ -158,11 +150,14 @@ namespace TestTask
             CreateWorkersTree();
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// calculatiom salary for 0ne worker
+        /// </summary>
+        private void CalcOneWorker()
         {
             int id = Int32.Parse(workerIdTextBox.Text.Replace(" ", ""));
             var worker = Company.GetWorkers().Where(w => w.Id == id).FirstOrDefault();
-            if(worker==null)
+            if (worker == null)
             {
                 MessageBox.Show("unknow worker");
                 return;
@@ -173,7 +168,7 @@ namespace TestTask
                 MessageBox.Show("select salary date");
                 return;
             }
-            Company.BaseRate= Int32.Parse(baseRateTextBox.Text.Replace(" ", ""));
+            Company.BaseRate = Int32.Parse(baseRateTextBox.Text.Replace(" ", ""));
             worker.CalculateSalaryForWorker((DateTime)dt);
             MessageBox.Show(worker.Salary.ToString());
         }
